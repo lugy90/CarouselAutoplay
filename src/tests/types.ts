@@ -8,19 +8,34 @@ interface Ioption {
   fill: string
 }
 
-type current = HTMLDivElement | null
-type keyframArr = Ikeyframe[]
+type Tcurrent = HTMLDivElement | null
+type TkeyframArr = Ikeyframe[]
 
 export class KeyframeEffect {
-  constructor(dom: current, kf: keyframArr, option: Ioption) {}
+  constructor(dom: Tcurrent, kf: TkeyframArr, option: Ioption) {
+    this.current = dom
+    this.keyframes = kf
+    this.option = option
+  }
+  current: Tcurrent
+  keyframes: TkeyframArr
+  option: Ioption
 }
 
 export class Animation {
-  constructor(kf: string) {
-    this.finished = new Promise((res, rej)=> { res() })
+  constructor(kf: KeyframeEffect) {
+    this.finished = undefined
+    this.duration = kf.option.duration
   }
-  finished: Promise<void>
-  play() {}
+  finished: Promise<void> | undefined
+  duration: number
+  play() {
+    this.finished = new Promise((res, rej)=> { 
+      setTimeout(()=>{
+        res()
+      }, 0)
+    })
+  }
 }
 
 export type TkeyframeInstance = InstanceType<typeof KeyframeEffect>

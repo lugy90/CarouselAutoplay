@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useLayoutEffect } from "react"
 import Poster from "../Poster"
 import Progress from "../Progress"
-import { useCarousel, useCarouselDispatch } from "../../stores/AppContext"
+import { useCarousel, useCarouselDispatch } from "../../stores/CarouselContext"
 import { ECarouselActionType, TCarouselAction } from "../../stores/types"
 import "./styles.css"
 const START_POINT = 0
@@ -24,7 +24,7 @@ export default function Carousel() {
         [
           { transform: `translateX(${distance}vw)`, transformOrigin: 'left center' }
         ],
-        { duration: 500, fill: 'forwards' }
+        { duration: 400, fill: 'forwards' }
       )
       const anim = new Animation(keyframes)
       anim.play()
